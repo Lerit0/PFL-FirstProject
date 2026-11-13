@@ -1,4 +1,5 @@
 import Parsing
+import Data.Char (isLower)
 
 type Name = Char
 type Env = [(Name, Bool)]
@@ -74,7 +75,7 @@ factor = do char '!'
                 p <- prop 
                 char ')'
                 return p
-         <|> do n <- getc
+         <|> do n <- satisfy isLower
                 return (Var n)
 
 constant :: Parser Prop
